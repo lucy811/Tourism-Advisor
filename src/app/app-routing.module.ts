@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
+import { HomeComponent } from './core/home/home.component';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'auth', loadChildren: './auth/auth.module#AuthModule'}
+  { path: '', component: HomeComponent }
 ];
 
 @NgModule({
