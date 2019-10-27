@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
+import { TravelInformationModule } from './travel-information/travel-information.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AuthModule } from './auth/auth.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    TravelInformationModule,
     CoreModule,
     AuthModule
   ],
