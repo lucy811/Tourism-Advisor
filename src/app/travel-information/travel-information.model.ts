@@ -1,8 +1,8 @@
   
-export interface TravelInformation {
+export interface TravelInfo {
   id: string;
   name: string;
-  price: number;
+  price: string;
   description: string;
   imagePath: string;
 }

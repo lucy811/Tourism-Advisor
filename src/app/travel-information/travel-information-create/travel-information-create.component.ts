@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TravelInfoService } from '../travel-information.service';
 import { mimeType } from './mime-type.validator';
 
 @Component({
@@ -12,7 +13,7 @@ export class TravelInformationCreateComponent implements OnInit {
   imagePreview: any;
   travelInfoForm: FormGroup;
 
-  constructor() { }
+  constructor(public traveInfoService: TravelInfoService) { }
 
   ngOnInit() {
     this.travelInfoForm = new FormGroup({
@@ -40,6 +41,16 @@ export class TravelInformationCreateComponent implements OnInit {
     if (this.travelInfoForm.invalid) {
       return ;
     }
-    console.log('form value: ' + JSON.stringify(this.travelInfoForm.value));
+    if (this.mode === 'create') {
+      this.traveInfoService.addTravelInfo(
+        this.travelInfoForm.value.name,
+        this.travelInfoForm.value.price,
+        this.travelInfoForm.value.description,
+        this.travelInfoForm.value.image
+      );
+    } else {
+
+    }
+    this.travelInfoForm.reset();
   }
 }
