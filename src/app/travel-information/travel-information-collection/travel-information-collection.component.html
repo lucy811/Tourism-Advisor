@@ -3,5 +3,20 @@
   <button class="btn btn-info btn-large" routerLink="/travel-info-create">Add New Travel Information</button>
 </div>
 <hr>
-<diV>
-</diV>
+<div class="row text-center" style="display:flex; flex-wrap: wrap;" *ngIf="travelInfoCollection.length > 0">
+  <div class="row" *ngFor="let travelInfo of travelInfoCollection">
+    <div class="col-md-3 col-sm-6">
+      <div class="thumbnail">
+        <img [src]=travelInfo.image>
+        <div class="caption">
+          <h4>{{ travelInfo.name }}</h4>
+        </div>
+        <p>
+          <a href="#" class="btn btn-info">More Information</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="info-text" *ngIf="travelInfoCollection.length <=0">No travel info added yet</p>

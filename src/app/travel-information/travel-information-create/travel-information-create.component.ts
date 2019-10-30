@@ -32,7 +32,6 @@ export class TravelInformationCreateComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = reader.result;
-      console.log('imagePreview: ' + this.imagePreview);
     };
     reader.readAsDataURL(file);
   }
