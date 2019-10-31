@@ -19,6 +19,8 @@ mongoose.connect("mongodb+srv://charlie:D3gRb4bhNB7FGu1V@cluster0-vtil8.mongodb.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false }));
 
+app.use('/images', express.static('backend/images'));
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*'); 
   // no matter which domain the app which is sending the request is running on, 

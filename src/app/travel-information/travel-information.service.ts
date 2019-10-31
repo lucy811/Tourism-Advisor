@@ -12,14 +12,16 @@ const BACKEND_URL = environment.apiUrl + '/travel-info';
 @Injectable({providedIn: 'root'})
 export class TravelInfoService {
   private travelInfoCollection: TravelInfo[] = [];
-  private travelInfoCollectionUpdated = new Subject<{travelInfoCollection: TravelInfo[], travelInfoCount: number}>();
+  private travelInfoCollectionUpdated = new Subject<{travelInfoCollection: TravelInfo[]}>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
   getTravelInfos() {  
-    this.http.get<{travelInfoCollection: any }>(BACKEND_URL)
-      .subscribe(responseData => {
+    this.http.get<{travelInfoCollection: any }>(BACKEND_URL).subscribe(responseData => {
         this.travelInfoCollection = responseData.travelInfoCollection;
+        this.travelInfoCollectionUpdated.next({
+          travelInfoCollection: [... this.travelInfoCollection]
+        });
       }
     );
   }
@@ -29,14 +31,13 @@ export class TravelInfoService {
   }
 
   addTravelInfo(name: string, price: string, description: string, image: File) {
-    console.log('Travel info service: ' + name + ':' + price + ':' + description + ':' + JSON.stringify(image));
     const travelInfoData = new FormData();
     travelInfoData.append('name', name);
     travelInfoData.append('price', price);
     travelInfoData.append('description', description);
     travelInfoData.append('image', image, name);
     this.http
-      .post<{message: string, travelInfo: TravelInfo}>(BACKEND_URL + '/post', travelInfoData)
+      .post<{message: string, travelInfo: TravelInfo}>(BACKEND_URL, travelInfoData)
       .subscribe((responseData) => {
         this.router.navigate(['/travel-info-collection']);
       });

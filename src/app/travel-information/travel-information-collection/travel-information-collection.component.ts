@@ -17,6 +17,12 @@ export class TravelInformationCollectionComponent implements OnInit, OnDestroy {
   constructor(public traveInfoService: TravelInfoService) { }
 
   ngOnInit() {
+    this.traveInfoService.getTravelInfos();
+    this.travelInfoCollectionSub = this.traveInfoService.getPostUpdateListener()
+      .subscribe((travelInfoCollectionData: {travelInfoCollection: TravelInfo[]}) => {
+        console.log('collection: ' + JSON.stringify(travelInfoCollectionData.travelInfoCollection));
+        this.travelInfoCollection = travelInfoCollectionData.travelInfoCollection;
+      });
   }
 
   ngOnDestroy() {
