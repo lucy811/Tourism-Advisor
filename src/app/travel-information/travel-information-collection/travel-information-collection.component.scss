@@ -14,3 +14,22 @@
 .text-center {
   margin-left: 30px;
 }
+
+.collection {
+  display: flex;
+  flex-wrap:wrap;
+
+  h5 {
+    margin: 5px;
+    white-space:nowrap;
+  }
+
+  a {
+    white-space:nowrap;
+    font-weight: bold;
+  }
+}
+
+.info {
+  margin: 10px;
+}
