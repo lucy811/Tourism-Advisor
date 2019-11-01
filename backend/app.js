@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const travelInfoRoutes = require('./routes/travel-info');
 const userRoutes = require('./routes/user');
 
 const app = express();
@@ -17,6 +18,8 @@ mongoose.connect("mongodb+srv://charlie:D3gRb4bhNB7FGu1V@cluster0-vtil8.mongodb.
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false }));
+
+app.use('/images', express.static('backend/images'));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*'); 
@@ -33,6 +36,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(travelInfoRoutes);
 app.use(userRoutes);
 
 module.exports = app;

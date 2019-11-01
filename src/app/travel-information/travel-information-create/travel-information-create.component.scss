@@ -1,0 +1,26 @@
+/* hide upload file */
+input[type="file"] {
+  visibility: hidden;
+}
+
+.button-style {
+  height: 100%;
+  width: 100%;
+}
+
+.image-style {
+  height:auto;
+  max-height:80px;
+  max-width:100%;
+  margin-left: 35%;
+  margin-right: 30%;
+}
+
+.image-preview {
+  height: 5rem;
+  margin: 1rem 0;
+}
+
+.image-preview img {
+  height: 100%;
+}

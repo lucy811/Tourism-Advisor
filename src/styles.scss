@@ -6,3 +6,16 @@
   margin: auto;
   padding-top: 15px;
 }
+
+.thumbnail img {
+  width: 290px;
+  height: 250px;
+}
+
+.thumbnail {
+  padding: 0;
+}
+
+.thumbnail .caption-full {
+  padding: 9px;
+}

@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">TravelAdvisor</a>
+    </div>
+
+    <div class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav">
+        <li class="nav-item" *ngIf="!userIsAuthenticated">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!userIsAuthenticated">
+          <a class="nav-link" routerLink="/signup">Singup</a>
+        </li>
+        <li class="nav-item" *ngIf="userIsAuthenticated">
+          <a class="nav-link" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

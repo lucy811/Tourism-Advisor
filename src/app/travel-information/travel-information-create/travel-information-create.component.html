@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div style="width: 40%; margin: 30px auto;">
+      <h3 style="text-align: center">Create or edit Travel Info</h3>
+        <form [formGroup]="travelInfoForm" (submit)="onSaveTravalInfo(travelInfoForm)">
+            <div class="form-group">
+              <input class="form-control" type="text" formControlName="name" placeholder="name">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" formControlName="price" placeholder="admission price">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" formControlName="description" placeholder="description">
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn btn-outline-secondary button-style" (click)="filePicker.click()">Pick Image</button>
+              <input type="file" #filePicker (change)="onImagePicked($event)">
+              <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && travelInfoForm.get('image').valid">
+                <img [src]="imagePreview" [alt]="travelInfoForm.value.name" class="image-style">
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-lg btn-info btn-block" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>  
