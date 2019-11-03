@@ -26,7 +26,6 @@ export class TravelInformationDetailComponent implements OnInit {
             description: travelInfoData.description,
             imagePath: travelInfoData.imagePath,
           };
-          console.log('travelInfo: ' + JSON.stringify(this.travelInfo));
         });
       } else {
         this.travelInfoId = null;
