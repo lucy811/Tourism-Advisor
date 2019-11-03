@@ -29,6 +29,8 @@ const storage = multer.diskStorage({
 
 router.get('/api/travel-info',  TravelInfoController.getTravelInfos);
 
+router.get('/api/travel-info/:id', TravelInfoController.getTravelInfo);
+
 router.post(
   '/api/travel-info',
   multer({storage: storage}).single('image'),

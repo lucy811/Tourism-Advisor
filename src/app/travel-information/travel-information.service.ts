@@ -22,9 +22,10 @@ export class TravelInfoService {
       ).pipe(map((responseData)=> {
         return responseData.travelInfoCollection.map(travelInfo => {
           return {
+            id: travelInfo._id,
             name: travelInfo.name,
             price: travelInfo.price,
-            id: travelInfo._id,
+            description: travelInfo.description,
             imagePath: travelInfo.imagePath
           }
         })
@@ -36,6 +37,10 @@ export class TravelInfoService {
         });
       }
     );
+  }
+
+  getTravelInfo(id: string) {
+    return this.http.get<{_id: string, name: string, price: string, imagePath: string, description: string}>(BACKEND_URL + '/' + id);
   }
 
   getPostUpdateListener() {

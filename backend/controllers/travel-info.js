@@ -39,3 +39,18 @@ exports.getTravelInfos = (req, res, next) => {
     })
   });
 };
+
+exports.getTravelInfo = (req, res, next) => {
+  TravelInfo.findById(req.params.id).then(travelInfo => {
+     if (travelInfo) {
+       res.status(200).json(travelInfo);
+     } else {
+       res.status(404).json({message: 'Post not found!'});
+     }
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: 'Fetching post failed!'
+    })
+  });
+};
