@@ -7,7 +7,7 @@ import { TravelInformationDetailComponent } from './travel-information-detail/tr
 const travelRoutes: Routes = [
   { path: 'travel-info-collection', component: TravelInformationCollectionComponent },
   { path: 'travel-info-create', component: TravelInformationCreateComponent },
-  { path: 'travel-info-detail', component: TravelInformationDetailComponent}
+  { path: 'travel-info-detail/:id', component: TravelInformationDetailComponent}
 ];
 
 @NgModule({

@@ -17,8 +17,20 @@ export class TravelInfoService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getTravelInfos() {  
-    this.http.get<{travelInfoCollection: any }>(BACKEND_URL).subscribe(responseData => {
-        this.travelInfoCollection = responseData.travelInfoCollection;
+    this.http
+      .get<{travelInfoCollection: any }>(BACKEND_URL
+      ).pipe(map((responseData)=> {
+        return responseData.travelInfoCollection.map(travelInfo => {
+          return {
+            name: travelInfo.name,
+            price: travelInfo.price,
+            id: travelInfo._id,
+            imagePath: travelInfo.imagePath
+          }
+        })
+      }))
+      .subscribe(transformedTravelInfos => {
+        this.travelInfoCollection = transformedTravelInfos;
         this.travelInfoCollectionUpdated.next({
           travelInfoCollection: [... this.travelInfoCollection]
         });
