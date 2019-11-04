@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ParamMap, ActivatedRoute } from '@angular/router';
+
+import { TravelInfo } from '../travel-information.model';
 import { TravelInfoService } from '../travel-information.service';
 import { mimeType } from './mime-type.validator';
 
@@ -10,10 +13,12 @@ import { mimeType } from './mime-type.validator';
 })
 export class TravelInformationCreateComponent implements OnInit {
   private mode = 'create';
+  private travelInfoId: string;
   imagePreview: any;
   travelInfoForm: FormGroup;
+  travelInfo: TravelInfo;
 
-  constructor(public traveInfoService: TravelInfoService) { }
+  constructor(public route: ActivatedRoute, public traveInfoService: TravelInfoService) { }
 
   ngOnInit() {
     this.travelInfoForm = new FormGroup({
@@ -22,6 +27,31 @@ export class TravelInformationCreateComponent implements OnInit {
       description: new FormControl(null, {validators: [Validators.required]}),
       image: new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]})
     });
+
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      if (paramMap.has('id')) {
+        this.mode = 'edit';
+        this.travelInfoId = paramMap.get('id');
+        this.traveInfoService.getTravelInfo(this.travelInfoId).subscribe(travelInfoData => {
+          this.travelInfo = {
+            id: travelInfoData._id,
+            name: travelInfoData.name,
+            price: travelInfoData.price,
+            description: travelInfoData.description,
+            imagePath: travelInfoData.imagePath
+          };
+          this.travelInfoForm.setValue({
+            name: this.travelInfo.name,
+            price: this.travelInfo.price,
+            description: this.travelInfo.description,
+            image: this.travelInfo.imagePath
+          });
+        });
+      } else {
+        this.mode = 'create';
+        this.travelInfoId = null;
+      }
+    })
   }
 
   onImagePicked(event: Event) {
