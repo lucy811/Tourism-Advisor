@@ -7,6 +7,7 @@ import { TravelInformationDetailComponent } from './travel-information-detail/tr
 const travelRoutes: Routes = [
   { path: 'travel-info-collection', component: TravelInformationCollectionComponent },
   { path: 'travel-info-create', component: TravelInformationCreateComponent },
+  { path: 'travel-info-edit/:id', component: TravelInformationCreateComponent},
   { path: 'travel-info-detail/:id', component: TravelInformationDetailComponent}
 ];
 
