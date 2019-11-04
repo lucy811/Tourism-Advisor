@@ -54,3 +54,34 @@ exports.getTravelInfo = (req, res, next) => {
     })
   });
 };
+
+exports.updateTravelInfo = (req, res, next) => {
+  let imagePath; 
+  if (req.file) {
+    console.log('file: ' + req.protocol);
+    const url = req.protocol + '://' + req.get('host');
+    imagePath = url + '/images/' + req.file.filename
+  } else {
+    imagePath = req.body.imagePath;
+  }
+  const travelInfo = new TravelInfo({
+    _id: req.body.id,
+    name: req.body.name,
+    price: req.body.price,
+    description: req.body.description,
+    imagePath: imagePath,
+  });
+  TravelInfo.updateOne({_id: req.params.id}, travelInfo).then(result => {
+    console.log(result);
+    if (result.n > 0) {
+      res.status(200).json({ message: 'Update successful!' });
+    } else {
+      res.status(401).json({ message: 'Not authorized!' });
+    }
+  })
+  .catch(error => {
+    res.status(501).json({
+      message: 'Couldn\'t update post!'
+    });
+  });
+}

@@ -32,6 +32,7 @@ export class TravelInformationCreateComponent implements OnInit {
       if (paramMap.has('id')) {
         this.mode = 'edit';
         this.travelInfoId = paramMap.get('id');
+        console.log('travelInfoId: ' +  this.travelInfoId);
         this.traveInfoService.getTravelInfo(this.travelInfoId).subscribe(travelInfoData => {
           this.travelInfo = {
             id: travelInfoData._id,
@@ -78,7 +79,13 @@ export class TravelInformationCreateComponent implements OnInit {
         this.travelInfoForm.value.image
       );
     } else {
-
+      this.traveInfoService.updateTravelInfo(
+        this.travelInfo.id,
+        this.travelInfoForm.value.name,
+        this.travelInfoForm.value.price,
+        this.travelInfoForm.value.description,
+        this.travelInfoForm.value.image
+      )
     }
     this.travelInfoForm.reset();
   }

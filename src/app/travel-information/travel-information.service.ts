@@ -59,4 +59,28 @@ export class TravelInfoService {
         this.router.navigate(['/travel-info-collection']);
       });
   }
+
+  updateTravelInfo(id: string, name: string, price: string, description: string, image: File | string) {
+    let travelInfoData: TravelInfo | FormData;
+    if (typeof(image) === 'object') {
+      travelInfoData = new FormData();
+      travelInfoData.append('id', id);
+      travelInfoData.append('name', name);
+      travelInfoData.append('price', price);
+      travelInfoData.append('description', description);
+      travelInfoData.append('image', image, name);
+    } else {
+      travelInfoData = {
+        id: id,
+        name: name,
+        price: price,
+        description: description,
+        imagePath: image
+      }
+    }
+
+    this.http.put(BACKEND_URL +'/' + id, travelInfoData).subscribe(response => {
+      console.log(JSON.stringify(response));
+    })
+  }
 }
