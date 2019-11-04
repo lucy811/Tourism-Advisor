@@ -14,7 +14,7 @@
           <p>{{ travelInfo.description }}</p>
           <div class="button-right">
             <button class="btn btn-xs btn-warning" [routerLink]="['/travel-info-edit', travelInfo.id]">Edit</button>
-            <button class="btn btn-xs btn-danger">Delete</button>
+            <button class="btn btn-xs btn-danger" (click)="onDelete(travelInfo.id)">Delete</button>
           </div>
         </div>
       </div>

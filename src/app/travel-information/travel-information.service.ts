@@ -83,4 +83,8 @@ export class TravelInfoService {
       console.log(JSON.stringify(response));
     })
   }
+
+  deleteTravelInfo(travelInfoId: string) {
+    return this.http.delete(BACKEND_URL + '/' + travelInfoId);
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ParamMap, ActivatedRoute } from '@angular/router';
 import { TravelInfoService } from '../travel-information.service';
 import { TravelInfo } from '../travel-information.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-travel-information-detail',
@@ -12,7 +13,7 @@ export class TravelInformationDetailComponent implements OnInit {
   private travelInfoId: string;
   travelInfo: TravelInfo;
 
-  constructor(public route: ActivatedRoute, private travelInfoService: TravelInfoService) { }
+  constructor(public route: ActivatedRoute, private travelInfoService: TravelInfoService, private router: Router) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -30,6 +31,12 @@ export class TravelInformationDetailComponent implements OnInit {
       } else {
         this.travelInfoId = null;
       }
+    })
+  }
+
+  onDelete(travelInfoId: string) {
+    this.travelInfoService.deleteTravelInfo(travelInfoId).subscribe(response => {
+      this.router.navigate(['/travel-info-collection']);
     })
   }
 }

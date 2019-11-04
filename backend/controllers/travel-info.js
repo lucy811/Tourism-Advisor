@@ -85,3 +85,21 @@ exports.updateTravelInfo = (req, res, next) => {
     });
   });
 }
+
+exports.deleteTravelInfo =  (req, res, next) => {
+  // delete data from database
+  TravelInfo.deleteOne({_id: req.params.id}).then(
+    result => {
+      console.log(result);
+      if (result.n > 0) {
+        res.status(200).json({message: 'Deletion successful!'});
+      } else {
+        res.status(401).json({message: 'Not authorized!'});
+      }
+   })
+   .catch(error => {
+     res.status(500).json({
+       message: 'Fetching posts failed!'
+     });
+   })
+};
