@@ -27,12 +27,18 @@ const storage = multer.diskStorage({
   }
 });
 
-router.get('/api/travel-info',  TravelInfoController.getTravelInfos);
-
 router.post(
   '/api/travel-info',
   multer({storage: storage}).single('image'),
   TravelInfoController.createdTravelInfo
 );
+
+router.put('/api/travel-info/:id', multer({storage: storage}).single('image'), TravelInfoController.updateTravelInfo);
+
+router.get('/api/travel-info',  TravelInfoController.getTravelInfos);
+
+router.get('/api/travel-info/:id', TravelInfoController.getTravelInfo);
+
+router.delete('/api/travel-info/:id', TravelInfoController.deleteTravelInfo);
 
 module.exports = router;

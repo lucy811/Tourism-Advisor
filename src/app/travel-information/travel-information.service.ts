@@ -17,13 +17,30 @@ export class TravelInfoService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getTravelInfos() {  
-    this.http.get<{travelInfoCollection: any }>(BACKEND_URL).subscribe(responseData => {
-        this.travelInfoCollection = responseData.travelInfoCollection;
+    this.http
+      .get<{travelInfoCollection: any }>(BACKEND_URL
+      ).pipe(map((responseData)=> {
+        return responseData.travelInfoCollection.map(travelInfo => {
+          return {
+            id: travelInfo._id,
+            name: travelInfo.name,
+            price: travelInfo.price,
+            description: travelInfo.description,
+            imagePath: travelInfo.imagePath
+          }
+        })
+      }))
+      .subscribe(transformedTravelInfos => {
+        this.travelInfoCollection = transformedTravelInfos;
         this.travelInfoCollectionUpdated.next({
           travelInfoCollection: [... this.travelInfoCollection]
         });
       }
     );
+  }
+
+  getTravelInfo(id: string) {
+    return this.http.get<{_id: string, name: string, price: string, imagePath: string, description: string}>(BACKEND_URL + '/' + id);
   }
 
   getPostUpdateListener() {
@@ -41,5 +58,33 @@ export class TravelInfoService {
       .subscribe((responseData) => {
         this.router.navigate(['/travel-info-collection']);
       });
+  }
+
+  updateTravelInfo(id: string, name: string, price: string, description: string, image: File | string) {
+    let travelInfoData: TravelInfo | FormData;
+    if (typeof(image) === 'object') {
+      travelInfoData = new FormData();
+      travelInfoData.append('id', id);
+      travelInfoData.append('name', name);
+      travelInfoData.append('price', price);
+      travelInfoData.append('description', description);
+      travelInfoData.append('image', image, name);
+    } else {
+      travelInfoData = {
+        id: id,
+        name: name,
+        price: price,
+        description: description,
+        imagePath: image
+      }
+    }
+
+    this.http.put(BACKEND_URL +'/' + id, travelInfoData).subscribe(response => {
+      console.log(JSON.stringify(response));
+    })
+  }
+
+  deleteTravelInfo(travelInfoId: string) {
+    return this.http.delete(BACKEND_URL + '/' + travelInfoId);
   }
 }
