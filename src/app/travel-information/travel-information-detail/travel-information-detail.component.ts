@@ -21,7 +21,6 @@ export class TravelInformationDetailComponent implements OnInit {
       if (paramMap.has('id')) {
         this.travelInfoId = paramMap.get('id');
         this.currentUser = this.authService.getCurrentLoginUser();
-        console.log('currentUser: ' +  this.currentUser);
         this.travelInfoService.getTravelInfo(this.travelInfoId).subscribe(travelInfoData => {
           this.travelInfo = {
             id: travelInfoData._id, 

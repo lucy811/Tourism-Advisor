@@ -4,6 +4,7 @@ import { ParamMap, ActivatedRoute } from '@angular/router';
 
 import { TravelInfo } from '../travel-information.model';
 import { TravelInfoService } from '../travel-information.service';
+import { Router } from '@angular/router';
 import { mimeType } from './mime-type.validator';
 
 @Component({
@@ -19,7 +20,7 @@ export class TravelInformationCreateComponent implements OnInit {
   travelInfo: TravelInfo;
   currentUser: string;
 
-  constructor(public route: ActivatedRoute, public traveInfoService: TravelInfoService) { }
+  constructor(public route: ActivatedRoute, public traveInfoService: TravelInfoService, private router: Router) { }
 
   ngOnInit() {
     this.travelInfoForm = new FormGroup({
@@ -86,9 +87,11 @@ export class TravelInformationCreateComponent implements OnInit {
         this.travelInfoForm.value.name,
         this.travelInfoForm.value.price,
         this.travelInfoForm.value.description,
-        this.travelInfoForm.value.image
+        this.travelInfoForm.value.image,
+        this.currentUser
       )
     }
     this.travelInfoForm.reset();
+    this.router.navigate(['/travel-info-collection']);
   }
 }

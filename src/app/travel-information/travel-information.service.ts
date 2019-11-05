@@ -62,7 +62,7 @@ export class TravelInfoService {
       });
   }
 
-  updateTravelInfo(id: string, name: string, price: string, description: string, image: File | string) {
+  updateTravelInfo(id: string, name: string, price: string, description: string, image: File | string, creator: string) {
     let travelInfoData: TravelInfo | FormData;
     if (typeof(image) === 'object') {
       travelInfoData = new FormData();
@@ -71,6 +71,7 @@ export class TravelInfoService {
       travelInfoData.append('price', price);
       travelInfoData.append('description', description);
       travelInfoData.append('image', image, name);
+      travelInfoData.append('creator', creator)
     } else {
       travelInfoData = {
         id: id,
@@ -78,7 +79,7 @@ export class TravelInfoService {
         price: price,
         description: description,
         imagePath: image,
-        creator: null
+        creator: creator
       }
     }
 
