@@ -12,7 +12,10 @@
           <h4>{{ travelInfo.name }}</h4>
           <p class="price-right">$ {{ travelInfo.price }} /person</p>
           <p>{{ travelInfo.description }}</p>
-          <div class="button-right">
+          <p>
+            <em>Submitted By {{ travelInfo.creator }}</em>
+          </p>
+          <div class="button-right" *ngIf="currentUser === travelInfo.creator">
             <button class="btn btn-xs btn-warning" [routerLink]="['/travel-info-edit', travelInfo.id]">Edit</button>
             <button class="btn btn-xs btn-danger" (click)="onDelete(travelInfo.id)">Delete</button>
           </div>

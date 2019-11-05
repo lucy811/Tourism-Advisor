@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ParamMap, ActivatedRoute } from '@angular/router';
 import { TravelInfoService } from '../travel-information.service';
+import { AuthService } from '../../auth/auth.service';
 import { TravelInfo } from '../travel-information.model';
 import { Router } from '@angular/router';
 
@@ -12,13 +13,14 @@ import { Router } from '@angular/router';
 export class TravelInformationDetailComponent implements OnInit {
   private travelInfoId: string;
   travelInfo: TravelInfo;
-
-  constructor(public route: ActivatedRoute, private travelInfoService: TravelInfoService, private router: Router) { }
+  currentUser: string;
+  constructor(public route: ActivatedRoute, private travelInfoService: TravelInfoService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.travelInfoId = paramMap.get('id');
+        this.currentUser = this.authService.getCurrentLoginUser();
         this.travelInfoService.getTravelInfo(this.travelInfoId).subscribe(travelInfoData => {
           this.travelInfo = {
             id: travelInfoData._id, 
@@ -26,6 +28,7 @@ export class TravelInformationDetailComponent implements OnInit {
             price: travelInfoData.price,
             description: travelInfoData.description,
             imagePath: travelInfoData.imagePath,
+            creator: travelInfoData.creator
           };
         });
       } else {

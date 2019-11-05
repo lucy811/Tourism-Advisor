@@ -26,7 +26,8 @@ export class TravelInfoService {
             name: travelInfo.name,
             price: travelInfo.price,
             description: travelInfo.description,
-            imagePath: travelInfo.imagePath
+            imagePath: travelInfo.imagePath,
+            creator: travelInfo.creator
           }
         })
       }))
@@ -40,19 +41,20 @@ export class TravelInfoService {
   }
 
   getTravelInfo(id: string) {
-    return this.http.get<{_id: string, name: string, price: string, imagePath: string, description: string}>(BACKEND_URL + '/' + id);
+    return this.http.get<{_id: string, name: string, price: string, imagePath: string, description: string, creator: string}>(BACKEND_URL + '/' + id);
   }
 
   getPostUpdateListener() {
     return this.travelInfoCollectionUpdated.asObservable();
   }
 
-  addTravelInfo(name: string, price: string, description: string, image: File) {
+  addTravelInfo(name: string, price: string, description: string, image: File, creator: string) {
     const travelInfoData = new FormData();
     travelInfoData.append('name', name);
     travelInfoData.append('price', price);
     travelInfoData.append('description', description);
     travelInfoData.append('image', image, name);
+    travelInfoData.append('creator', creator)
     this.http
       .post<{message: string, travelInfo: TravelInfo}>(BACKEND_URL, travelInfoData)
       .subscribe((responseData) => {
@@ -60,7 +62,7 @@ export class TravelInfoService {
       });
   }
 
-  updateTravelInfo(id: string, name: string, price: string, description: string, image: File | string) {
+  updateTravelInfo(id: string, name: string, price: string, description: string, image: File | string, creator: string) {
     let travelInfoData: TravelInfo | FormData;
     if (typeof(image) === 'object') {
       travelInfoData = new FormData();
@@ -69,13 +71,15 @@ export class TravelInfoService {
       travelInfoData.append('price', price);
       travelInfoData.append('description', description);
       travelInfoData.append('image', image, name);
+      travelInfoData.append('creator', creator)
     } else {
       travelInfoData = {
         id: id,
         name: name,
         price: price,
         description: description,
-        imagePath: image
+        imagePath: image,
+        creator: creator
       }
     }
 

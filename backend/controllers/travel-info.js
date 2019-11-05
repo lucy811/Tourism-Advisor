@@ -8,6 +8,7 @@ exports.createdTravelInfo = (req, res, next) => {
     price: req.body.price,
     description: req.body.description,
     imagePath: url +'/images/' + req.file.filename,
+    creator: req.body.creator
   });
   travelInfo.save().then(createdTravelInfo => {
     res.status(201).json({
@@ -70,6 +71,7 @@ exports.updateTravelInfo = (req, res, next) => {
     price: req.body.price,
     description: req.body.description,
     imagePath: imagePath,
+    creator: req.body.creator
   });
   TravelInfo.updateOne({_id: req.params.id}, travelInfo).then(result => {
     console.log(result);
