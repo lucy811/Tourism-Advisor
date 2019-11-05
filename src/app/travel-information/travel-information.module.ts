@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { TravelInformationCollectionComponent } from './travel-information-collection/travel-information-collection.component';
 import { TravelInformationCreateComponent } from './travel-information-create/travel-information-create.component';
@@ -16,6 +17,7 @@ import { TravelRoutingModule } from './travel-information-routing.module';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     TravelRoutingModule
   ]
 })

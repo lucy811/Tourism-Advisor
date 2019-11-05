@@ -1,20 +1,32 @@
-<div class="travel-advisor">
-  <h4>View the travel information from all over the world</h4>
-  <button class="btn btn-info btn-large" routerLink="/travel-info-create">Add New Travel Information</button>
-</div>
-<hr>
-<div class="collection" *ngIf="travelInfoCollection.length > 0">
-  <div *ngFor="let travelInfo of travelInfoCollection">
-    <div class="col-md-3 col-sm-6 info">
-      <div class="thumbnail">
-        <img [src]=travelInfo.imagePath>
-        <div class="caption">
-          <h5>{{ travelInfo.name }}</h5>
-          <a class="btn btn-warning" [routerLink]="['/travel-info-detail', travelInfo.id]">More Information</a>
+<div  *ngIf="!isLoaded">
+  <div class="travel-advisor">
+    <h4>View the travel information from all over the world</h4>
+    <button class="btn btn-info btn-large" routerLink="/travel-info-create">Add New Travel Information</button>
+  </div>
+  <hr>
+  <div class="collection" *ngIf="travelInfoCollection.length > 0">
+    <div *ngFor="let travelInfo of travelInfoCollection">
+      <div class="col-md-3 col-sm-6 info">
+        <div class="thumbnail">
+          <img [src]=travelInfo.imagePath>
+          <div class="caption">
+            <h5>{{ travelInfo.name }}</h5>
+            <a class="btn btn-warning" [routerLink]="['/travel-info-detail', travelInfo.id]">More Information</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<p class="info-text" *ngIf="travelInfoCollection.length <=0">No travel info added yet</p>
+  <p class="info-text" *ngIf="travelInfoCollection.length <=0">No travel info added yet</p>
+</div>
+<ngx-spinner
+  bdOpacity = 0.9
+  bdColor = "rgba(51,51,51,0.5)"
+  size = "medium"
+  color = "#fff"
+  type = "ball-beat"
+  [fullScreen] = "true"
+>
+<p style="color: white" > Loading...</p>
+</ngx-spinner>

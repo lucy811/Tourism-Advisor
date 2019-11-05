@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { TravelInfo } from '../travel-information.model';
 import { TravelInfoService } from '../travel-information.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-travel-information-collection',
@@ -12,16 +13,21 @@ import { TravelInfoService } from '../travel-information.service';
 
 export class TravelInformationCollectionComponent implements OnInit, OnDestroy {
   travelInfoCollection: TravelInfo[] = [];
+  isLoaded: boolean;
   private travelInfoCollectionSub: Subscription;
 
-  constructor(public traveInfoService: TravelInfoService) { }
+  constructor(public traveInfoService: TravelInfoService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.isLoaded = true;
+    this.spinner.show();
     this.traveInfoService.getTravelInfos();
     this.travelInfoCollectionSub = this.traveInfoService.getPostUpdateListener()
       .subscribe((travelInfoCollectionData: {travelInfoCollection: TravelInfo[]}) => {
         console.log('collection: ' + JSON.stringify(travelInfoCollectionData.travelInfoCollection));
         this.travelInfoCollection = travelInfoCollectionData.travelInfoCollection;
+        this.isLoaded = false;
+        this.spinner.hide();
       });
   }
 
