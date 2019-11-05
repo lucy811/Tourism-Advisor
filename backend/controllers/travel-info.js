@@ -8,6 +8,7 @@ exports.createdTravelInfo = (req, res, next) => {
     price: req.body.price,
     description: req.body.description,
     imagePath: url +'/images/' + req.file.filename,
+    creator: req.body.creator
   });
   travelInfo.save().then(createdTravelInfo => {
     res.status(201).json({
@@ -28,6 +29,7 @@ exports.createdTravelInfo = (req, res, next) => {
 exports.getTravelInfos = (req, res, next) => {
   const travelInfoQuery = TravelInfo.find();
   travelInfoQuery.then(fetchedTravelInfos => {
+    console.log('get: ' + JSON.stringify(fetchedTravelInfos));
     res.status(200).json({
       message: 'travel info collection fetched successfully!',
       travelInfoCollection: fetchedTravelInfos,
@@ -69,7 +71,7 @@ exports.updateTravelInfo = (req, res, next) => {
     name: req.body.name,
     price: req.body.price,
     description: req.body.description,
-    imagePath: imagePath,
+    imagePath: imagePath
   });
   TravelInfo.updateOne({_id: req.params.id}, travelInfo).then(result => {
     console.log(result);

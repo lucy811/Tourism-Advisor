@@ -10,6 +10,7 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
   userIsAuthenticated = false;
+  currentUser: string;
   private authListenerSubs: Subscription;
 
   constructor(private authService: AuthService) { }
@@ -20,7 +21,7 @@ export class HeaderComponent implements OnInit {
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
-        console.log(this.userIsAuthenticated);
+        this.currentUser = this.authService.getCurrentLoginUser();
     });
   }
 

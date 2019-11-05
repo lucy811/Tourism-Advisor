@@ -13,6 +13,9 @@
           <a class="nav-link" routerLink="/signup">Singup</a>
         </li>
         <li class="nav-item" *ngIf="userIsAuthenticated">
+          <p class="nav-link">Login as {{ currentUser }}</p>
+        </li>
+        <li class="nav-item" *ngIf="userIsAuthenticated">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
       </ul>

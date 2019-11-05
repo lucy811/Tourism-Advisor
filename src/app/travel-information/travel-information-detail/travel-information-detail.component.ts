@@ -26,6 +26,7 @@ export class TravelInformationDetailComponent implements OnInit {
             price: travelInfoData.price,
             description: travelInfoData.description,
             imagePath: travelInfoData.imagePath,
+            creator: travelInfoData.creator
           };
         });
       } else {

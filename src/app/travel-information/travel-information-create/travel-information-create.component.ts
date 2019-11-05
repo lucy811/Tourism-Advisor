@@ -4,6 +4,7 @@ import { ParamMap, ActivatedRoute } from '@angular/router';
 
 import { TravelInfo } from '../travel-information.model';
 import { TravelInfoService } from '../travel-information.service';
+import { AuthService } from '../../auth/auth.service';
 import { mimeType } from './mime-type.validator';
 
 @Component({
@@ -17,8 +18,9 @@ export class TravelInformationCreateComponent implements OnInit {
   imagePreview: any;
   travelInfoForm: FormGroup;
   travelInfo: TravelInfo;
+  currentUser: string;
 
-  constructor(public route: ActivatedRoute, public traveInfoService: TravelInfoService) { }
+  constructor(public route: ActivatedRoute, public traveInfoService: TravelInfoService, public authService: AuthService) { }
 
   ngOnInit() {
     this.travelInfoForm = new FormGroup({
@@ -27,19 +29,20 @@ export class TravelInformationCreateComponent implements OnInit {
       description: new FormControl(null, {validators: [Validators.required]}),
       image: new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]})
     });
-
+    // this.currentUser = this.authService.getUserName();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'edit';
         this.travelInfoId = paramMap.get('id');
-        console.log('travelInfoId: ' +  this.travelInfoId);
         this.traveInfoService.getTravelInfo(this.travelInfoId).subscribe(travelInfoData => {
           this.travelInfo = {
             id: travelInfoData._id,
             name: travelInfoData.name,
             price: travelInfoData.price,
             description: travelInfoData.description,
-            imagePath: travelInfoData.imagePath
+            imagePath: travelInfoData.imagePath,
+            creator: travelInfoData.creator
+
           };
           this.travelInfoForm.setValue({
             name: this.travelInfo.name,
@@ -76,7 +79,8 @@ export class TravelInformationCreateComponent implements OnInit {
         this.travelInfoForm.value.name,
         this.travelInfoForm.value.price,
         this.travelInfoForm.value.description,
-        this.travelInfoForm.value.image
+        this.travelInfoForm.value.image,
+        this.currentUser
       );
     } else {
       this.traveInfoService.updateTravelInfo(

@@ -5,4 +5,5 @@ export interface TravelInfo {
   price: string;
   description: string;
   imagePath: string;
+  creator: string;
 }
