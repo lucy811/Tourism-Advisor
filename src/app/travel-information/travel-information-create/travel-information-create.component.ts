@@ -4,6 +4,7 @@ import { ParamMap, ActivatedRoute } from '@angular/router';
 
 import { TravelInfo } from '../travel-information.model';
 import { TravelInfoService } from '../travel-information.service';
+import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { mimeType } from './mime-type.validator';
 
@@ -20,7 +21,7 @@ export class TravelInformationCreateComponent implements OnInit {
   travelInfo: TravelInfo;
   currentUser: string;
 
-  constructor(public route: ActivatedRoute, public traveInfoService: TravelInfoService, private router: Router) { }
+  constructor(public route: ActivatedRoute, public traveInfoService: TravelInfoService, private router: Router, public authService: AuthService) { }
 
   ngOnInit() {
     this.travelInfoForm = new FormGroup({
@@ -29,6 +30,7 @@ export class TravelInformationCreateComponent implements OnInit {
       description: new FormControl(null, {validators: [Validators.required]}),
       image: new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]})
     });
+    this.currentUser = this.authService.getCurrentLoginUser();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'edit';
