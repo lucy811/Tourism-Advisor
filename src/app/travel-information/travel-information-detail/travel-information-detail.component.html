@@ -19,6 +19,21 @@
             <button class="btn btn-xs btn-warning" [routerLink]="['/travel-info-edit', travelInfo.id]">Edit</button>
             <button class="btn btn-xs btn-danger" (click)="onDelete(travelInfo.id)">Delete</button>
           </div>
+          <hr>
+          <div class="comment-right">
+            <a class="btn btn-primary" [routerLink]="['/travel-info-comment', travelInfo.id]">Add New Comment</a>
+          </div>
+          <div *ngFor="let comment of comments">
+            <p>{{ comment.comment }} </p>
+            <p>
+              <em>Submitted By {{ comment.creator }}</em>
+            </p>
+            <div class="button-right" *ngIf="currentUser === comment.creator">
+                <button class="btn btn-xs btn-warning">Edit</button>
+                <button class="btn btn-xs btn-danger">Delete</button>
+              </div>
+            <hr>
+          </div>
         </div>
       </div>
     </div>
