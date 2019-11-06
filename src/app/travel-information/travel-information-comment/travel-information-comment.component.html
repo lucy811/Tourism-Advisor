@@ -1,1 +1,17 @@
-<p>travel-information-comment works!</p>
+<div class="container">
+  <div class="row">
+    <div style="width: 50%; margin: 25px auto;">
+      <h3>Comment on {{ name }}</h3>
+        <form [formGroup]="commentForm" (submit)="onSaveComment()">
+            <div class="form-group">
+                <input class="form-control" type="text" formControlName="comment" placeholder="comment">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-info btn-block">Submit</button>
+            </div>
+        </form>
+        <a [routerLink]="['/travel-info-detail', travelInfoId]">Go Back</a>
+    </div>
+  </div>
+</div>
+

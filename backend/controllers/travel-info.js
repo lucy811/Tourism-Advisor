@@ -1,5 +1,6 @@
 
 const TravelInfo = require('../models/travel-info');
+const Comment = require('../models/comment');
 
 exports.createdTravelInfo = (req, res, next) => {
   const url = req.protocol + '://' + req.get('host');
@@ -46,12 +47,12 @@ exports.getTravelInfo = (req, res, next) => {
      if (travelInfo) {
        res.status(200).json(travelInfo);
      } else {
-       res.status(404).json({message: 'Post not found!'});
+       res.status(404).json({message: 'Travel info not found!'});
      }
   })
   .catch(error => {
     res.status(500).json({
-      message: 'Fetching post failed!'
+      message: 'Fetching travel info failed!'
     })
   });
 };
@@ -104,4 +105,44 @@ exports.deleteTravelInfo =  (req, res, next) => {
        message: 'Fetching posts failed!'
      });
    })
+};
+
+exports.createdComment = (req, res, next) => {
+  console.log('req: ' + JSON.stringify(req.body));
+  const url = req.protocol + '://' + req.get('host');
+  const comment = new Comment({
+    travelInfoId: req.body.travelInfoId,
+    name: req.body.name,
+    comment: req.body.comment,
+    creator: req.body.creator
+  });
+  comment.save().then(comment => {
+    res.status(201).json({
+      message: 'Comment added successfully',
+      comment: {
+        ...comment,
+        id: comment._id
+      }
+    });
+  })
+  .catch(error => {
+     res.status(500).json({
+       message: 'Creating a comment failed!'
+     })
+  });
+}
+
+exports.getComment = (req, res, next) => {
+  Comment.find({"travelInfoId": req.params.id}).then(comment => {
+     if (comment) {
+       res.status(200).json(comment);
+     } else {
+       res.status(404).json({message: 'Comment not found!'});
+     }
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: 'Fetching comment failed!'
+    })
+  });
 };

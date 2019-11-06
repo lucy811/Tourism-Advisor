@@ -91,4 +91,17 @@ export class TravelInfoService {
   deleteTravelInfo(travelInfoId: string) {
     return this.http.delete(BACKEND_URL + '/' + travelInfoId);
   }
+
+  addComment(comment: string, travelInfoId: string, creator: string, name: string) {
+    const commentData = {'comment': comment, 'travelInfoId': travelInfoId, 'creator': creator, 'name': name}
+    this.http
+    .post<{message: string, comment: Comment}>(BACKEND_URL + '/comment', commentData)
+    .subscribe((responseData) => {
+      this.router.navigate(['/travel-info-detail', travelInfoId]);
+    });
+  }
+
+  getComments(id: string) {
+    return this.http.get<{comments: Comment[]}>(BACKEND_URL + '/' + id +'/comment');
+  }
 }

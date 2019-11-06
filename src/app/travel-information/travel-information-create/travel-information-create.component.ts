@@ -71,7 +71,7 @@ export class TravelInformationCreateComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  onSaveTravalInfo() {
+  onSaveTravelInfo() {
     if (this.travelInfoForm.invalid) {
       return ;
     }

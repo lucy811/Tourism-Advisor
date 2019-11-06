@@ -3,6 +3,7 @@ import { ParamMap, ActivatedRoute } from '@angular/router';
 import { TravelInfoService } from '../travel-information.service';
 import { AuthService } from '../../auth/auth.service';
 import { TravelInfo } from '../travel-information.model';
+import { Comment } from '../comment.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,6 +15,7 @@ export class TravelInformationDetailComponent implements OnInit {
   private travelInfoId: string;
   travelInfo: TravelInfo;
   currentUser: string;
+  comments: any;
   constructor(public route: ActivatedRoute, private travelInfoService: TravelInfoService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
@@ -30,6 +32,10 @@ export class TravelInformationDetailComponent implements OnInit {
             imagePath: travelInfoData.imagePath,
             creator: travelInfoData.creator
           };
+        });
+
+        this.travelInfoService.getComments(this.travelInfoId).subscribe(commentsData => {
+          this.comments = commentsData;
         });
       } else {
         this.travelInfoId = null;

@@ -33,11 +33,18 @@ router.post(
   TravelInfoController.createdTravelInfo
 );
 
+router.post(
+  '/api/travel-info/comment',
+  TravelInfoController.createdComment
+);
+
 router.put('/api/travel-info/:id', multer({storage: storage}).single('image'), TravelInfoController.updateTravelInfo);
 
 router.get('/api/travel-info',  TravelInfoController.getTravelInfos);
 
 router.get('/api/travel-info/:id', TravelInfoController.getTravelInfo);
+
+router.get('/api/travel-info/:id/comment', TravelInfoController.getComment);
 
 router.delete('/api/travel-info/:id', TravelInfoController.deleteTravelInfo);
 
