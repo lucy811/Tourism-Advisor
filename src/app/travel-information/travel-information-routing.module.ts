@@ -11,7 +11,8 @@ const travelRoutes: Routes = [
   { path: 'travel-info-create', component: TravelInformationCreateComponent, canActivate: [AuthGuard] },
   { path: 'travel-info-edit/:id', component: TravelInformationCreateComponent, canActivate: [AuthGuard]},
   { path: 'travel-info-detail/:id', component: TravelInformationDetailComponent, canActivate: [AuthGuard]},
-  { path: 'travel-info-comment/:id', component: TravelInformationCommentComponent, canActivate: [AuthGuard]}
+  { path: 'travel-info-comment/:id', component: TravelInformationCommentComponent, canActivate: [AuthGuard]},
+  { path: 'travel-info-comment/:id/:editId', component: TravelInformationCommentComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

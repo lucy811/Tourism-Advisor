@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { TravelInfo } from './travel-information.model';
+import { Comment } from './comment.model';
 
 const BACKEND_URL = environment.apiUrl + '/travel-info';
 
@@ -42,6 +43,10 @@ export class TravelInfoService {
 
   getTravelInfo(id: string) {
     return this.http.get<{_id: string, name: string, price: string, imagePath: string, description: string, creator: string}>(BACKEND_URL + '/' + id);
+  }
+
+  getComment(id: string) {
+    return this.http.get<{comment: Comment}>(BACKEND_URL + '/comment/' + id);
   }
 
   getPostUpdateListener() {
@@ -102,6 +107,6 @@ export class TravelInfoService {
   }
 
   getComments(id: string) {
-    return this.http.get<{comments: Comment[]}>(BACKEND_URL + '/' + id +'/comment');
+    return this.http.get<{comments: Comment[]}>(BACKEND_URL + '/' + id +'/comments');
   }
 }

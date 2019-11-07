@@ -13,6 +13,7 @@ import { ParamMap, ActivatedRoute } from '@angular/router';
 export class TravelInformationCommentComponent implements OnInit {
   private mode = 'create';
   private travelInfoId: string;
+  private commentId: string;
   private creator: string;
   private name: string;
   commentForm: FormGroup;
@@ -27,8 +28,19 @@ export class TravelInformationCommentComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.travelInfoId = paramMap.get('id');
+        if (paramMap.has('editId')) {
+          const id = paramMap.get('editId');
+          this.commentId = id;
+        }
+
         this.traveInfoService.getTravelInfo(this.travelInfoId).subscribe(response => {
           this.name = response.name;
+        })
+
+        this.traveInfoService.getComment(this.commentId).subscribe(response => {
+          this.commentForm.setValue({
+            comment: response.comment
+          });
         })
       }
     })
