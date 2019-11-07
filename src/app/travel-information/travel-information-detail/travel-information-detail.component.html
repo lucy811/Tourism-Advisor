@@ -29,9 +29,9 @@
               <em>Submitted By {{ comment.creator }}</em>
             </p>
             <div class="button-right" *ngIf="currentUser === comment.creator">
-                <button class="btn btn-xs btn-warning">Edit</button>
-                <button class="btn btn-xs btn-danger">Delete</button>
-              </div>
+              <button class="btn btn-xs btn-warning" [routerLink]="['/travel-info-comment', travelInfo.id, comment._id]">Edit</button>
+              <button class="btn btn-xs btn-danger">Delete</button>
+            </div>
             <hr>
           </div>
         </div>

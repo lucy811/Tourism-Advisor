@@ -132,7 +132,7 @@ exports.createdComment = (req, res, next) => {
   });
 }
 
-exports.getComment = (req, res, next) => {
+exports.getComments = (req, res, next) => {
   Comment.find({"travelInfoId": req.params.id}).then(comment => {
      if (comment) {
        res.status(200).json(comment);
@@ -143,6 +143,21 @@ exports.getComment = (req, res, next) => {
   .catch(error => {
     res.status(500).json({
       message: 'Fetching comment failed!'
+    })
+  });
+};
+
+exports.getComment = (req, res, next) => {
+  Comment.findById(req.params.id).then(comment => {
+     if (comment) {
+       res.status(200).json(comment);
+     } else {
+       res.status(404).json({message: 'Comment not found!'});
+     }
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: 'Fetching comment info failed!'
     })
   });
 };

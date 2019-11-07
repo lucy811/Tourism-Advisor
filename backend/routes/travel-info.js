@@ -44,7 +44,9 @@ router.get('/api/travel-info',  TravelInfoController.getTravelInfos);
 
 router.get('/api/travel-info/:id', TravelInfoController.getTravelInfo);
 
-router.get('/api/travel-info/:id/comment', TravelInfoController.getComment);
+router.get('/api/travel-info/:id/comments', TravelInfoController.getComments);
+
+router.get('/api/travel-info/comment/:id', TravelInfoController.getComment);
 
 router.delete('/api/travel-info/:id', TravelInfoController.deleteTravelInfo);
 

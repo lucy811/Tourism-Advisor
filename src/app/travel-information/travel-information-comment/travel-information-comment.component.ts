@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TravelInfoService } from '../travel-information.service';
+import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { ParamMap, ActivatedRoute } from '@angular/router';
 
@@ -12,23 +13,34 @@ import { ParamMap, ActivatedRoute } from '@angular/router';
 export class TravelInformationCommentComponent implements OnInit {
   private mode = 'create';
   private travelInfoId: string;
+  private commentId: string;
   private creator: string;
   private name: string;
   commentForm: FormGroup;
 
-  constructor(public route: ActivatedRoute, public traveInfoService: TravelInfoService,  private router: Router) { }
+  constructor(public route: ActivatedRoute, public traveInfoService: TravelInfoService,  private router: Router, public authService: AuthService) { }
 
   ngOnInit() {
     this.commentForm = new FormGroup({
       comment: new FormControl(null, {validators: [Validators.required]}),
     })
-
+    this.creator = this.authService.getCurrentLoginUser();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.travelInfoId = paramMap.get('id');
+        if (paramMap.has('editId')) {
+          const id = paramMap.get('editId');
+          this.commentId = id;
+        }
+
         this.traveInfoService.getTravelInfo(this.travelInfoId).subscribe(response => {
-          this.creator = response.creator;
           this.name = response.name;
+        })
+
+        this.traveInfoService.getComment(this.commentId).subscribe(response => {
+          this.commentForm.setValue({
+            comment: response.comment
+          });
         })
       }
     })
