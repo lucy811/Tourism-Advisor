@@ -17,7 +17,7 @@
           </p>
           <div class="button-right" *ngIf="currentUser === travelInfo.creator">
             <button class="btn btn-xs btn-warning" [routerLink]="['/travel-info-edit', travelInfo.id]">Edit</button>
-            <button class="btn btn-xs btn-danger" (click)="onDelete(travelInfo.id)">Delete</button>
+            <button class="btn btn-xs btn-danger" (click)="onDeleteTravelInfo(travelInfo.id)">Delete</button>
           </div>
           <hr>
           <div class="comment-right">
@@ -30,7 +30,7 @@
             </p>
             <div class="button-right" *ngIf="currentUser === comment.creator">
               <button class="btn btn-xs btn-warning" [routerLink]="['/travel-info-comment', travelInfo.id, comment._id]">Edit</button>
-              <button class="btn btn-xs btn-danger">Delete</button>
+              <button class="btn btn-xs btn-danger" (click)="onDeleteComment(comment._id)">Delete</button>
             </div>
             <hr>
           </div>

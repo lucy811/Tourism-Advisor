@@ -95,20 +95,19 @@ exports.deleteTravelInfo =  (req, res, next) => {
     result => {
       console.log(result);
       if (result.n > 0) {
-        res.status(200).json({message: 'Deletion travel infos successful!'});
+        res.status(200).json({message: 'Deletion travel info successful!'});
       } else {
         res.status(401).json({message: 'Not authorized!'});
       }
    })
    .catch(error => {
      res.status(500).json({
-       message: 'Fetching travel infos failed!'
+       message: 'Fetching travel info failed!'
      });
    })
 };
 
 exports.createdComment = (req, res, next) => {
-  console.log('req: ' + JSON.stringify(req.body));
   const url = req.protocol + '://' + req.get('host');
   const comment = new Comment({
     travelInfoId: req.body.travelInfoId,
@@ -163,7 +162,6 @@ exports.getComment = (req, res, next) => {
 };
 
 exports.updateComment = (req, res, next) => {
-  console.log('req: ' + JSON.stringify(req.body));
   const comment = new Comment({
     _id: req.body.id,
     comment: req.body.comment,
@@ -185,3 +183,22 @@ exports.updateComment = (req, res, next) => {
     });
   });
 }
+
+exports.deleteComment =  (req, res, next) => {
+  console.log('req: ' + JSON.stringify(req.params.id));
+  // delete data from database
+  Comment.deleteOne({_id: req.params.id}).then(
+    result => {
+      console.log(result);
+      if (result.n > 0) {
+        res.status(200).json({message: 'Deletion comment successful!'});
+      } else {
+        res.status(401).json({message: 'Not authorized!'});
+      }
+   })
+   .catch(error => {
+     res.status(500).json({
+       message: 'Fetching comment failed!'
+     });
+   })
+};

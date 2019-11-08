@@ -97,6 +97,10 @@ export class TravelInfoService {
     return this.http.delete(BACKEND_URL + '/' + travelInfoId);
   }
 
+  deleteComment(commentId: string) {
+    return this.http.delete(BACKEND_URL + '/comment/' + commentId);
+  }
+
   addComment(comment: string, travelInfoId: string, creator: string, name: string) {
     const commentData = {'comment': comment, 'travelInfoId': travelInfoId, 'creator': creator, 'name': name}
     this.http
