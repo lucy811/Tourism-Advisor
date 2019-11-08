@@ -9,13 +9,23 @@
         This field is required.
       </small>
       <small class="form-text text-danger"
-        [hidden]="!loginForm.controls.email?.errors?.customEmailValidator">
+        [hidden]="!loginForm.controls.email?.errors?.customEmailValidator || loginForm.controls.email?.errors?.required">
         This field must be a valid email address.
       </small>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input name="password" ngModel type="password" class="form-control" required>
+      <input name="password" ngModel type="password" class="form-control" required  minlength="3">
     </div>
-    <button type="submit" class="btn btn-primary">Log In</button>
+    <div [hidden]="!(loginForm.controls.password?.dirty && loginForm.controls.password?.invalid)">
+      <small class="form-text text-danger"
+        [hidden]="!loginForm.controls.password?.errors?.required">
+        This field is required.
+      </small>
+      <small class="form-text text-danger"
+        [hidden]="!loginForm.controls.password?.errors?.minlength">
+        This field should be no less than 3 chars.
+      </small>
+    </div>
+    <button type="submit" class="btn btn-primary auth">Log In</button>
 </form>
