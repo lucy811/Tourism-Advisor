@@ -84,7 +84,7 @@ exports.updateTravelInfo = (req, res, next) => {
   })
   .catch(error => {
     res.status(501).json({
-      message: 'Couldn\'t update post!'
+      message: 'Couldn\'t update travel info!'
     });
   });
 }
@@ -95,14 +95,14 @@ exports.deleteTravelInfo =  (req, res, next) => {
     result => {
       console.log(result);
       if (result.n > 0) {
-        res.status(200).json({message: 'Deletion successful!'});
+        res.status(200).json({message: 'Deletion travel infos successful!'});
       } else {
         res.status(401).json({message: 'Not authorized!'});
       }
    })
    .catch(error => {
      res.status(500).json({
-       message: 'Fetching posts failed!'
+       message: 'Fetching travel infos failed!'
      });
    })
 };
@@ -161,3 +161,27 @@ exports.getComment = (req, res, next) => {
     })
   });
 };
+
+exports.updateComment = (req, res, next) => {
+  console.log('req: ' + JSON.stringify(req.body));
+  const comment = new Comment({
+    _id: req.body.id,
+    comment: req.body.comment,
+    travelInfoId: req.body.travelInfoId,
+    creator: req.body.creator,
+    name: req.body.name
+  });
+  Comment.updateOne({_id: req.params.id}, comment).then(result => {
+    console.log(result);
+    if (result.n > 0) {
+      res.status(200).json({ message: 'Update comment successful!' });
+    } else {
+      res.status(401).json({ message: 'Not authorized!' });
+    }
+  })
+  .catch(error => {
+    res.status(501).json({
+      message: 'Couldn\'t update comment!'
+    });
+  });
+}
