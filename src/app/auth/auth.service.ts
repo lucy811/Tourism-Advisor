@@ -72,10 +72,14 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
+  getToken() {
+    return this.token;
+  }
+
   private setAuthTimer(duration: number) {
     this.tokenTimer = setTimeout(() => {
       this.logout();
-    }, duration * 1000)
+    }, duration * 1000);
   }
 
   private saveAuthData(token: string, expirationDate: Date, userId: string, userName: string) {

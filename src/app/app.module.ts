@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AuthInterceptor } from './auth/auth-interceptor';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
@@ -18,9 +19,12 @@ import { TravelInformationModule } from './travel-information/travel-information
     HttpClientModule,
     TravelInformationModule,
     CoreModule,
+    HttpClientModule,
     AuthModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
