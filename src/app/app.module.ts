@@ -4,10 +4,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { ErrorInterceptor } from './error/error-interceptor';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
+import { ToastrModule } from 'ngx-toastr';
 import { TravelInformationModule } from './travel-information/travel-information.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,12 +21,15 @@ import { TravelInformationModule } from './travel-information/travel-information
     AppRoutingModule,
     HttpClientModule,
     TravelInformationModule,
+    BrowserAnimationsModule,
     CoreModule,
     HttpClientModule,
-    AuthModule
+    AuthModule,
+    ToastrModule.forRoot()
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

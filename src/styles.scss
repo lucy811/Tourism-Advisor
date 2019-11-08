@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~ngx-toastr/toastr-bs4-alert';
 
 .auth-form {
   width: 30%;
@@ -18,4 +22,8 @@
 
 .thumbnail .caption-full {
   padding: 9px;
+}
+
+.auth {
+  margin-top: 10px;
 }
