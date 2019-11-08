@@ -29,8 +29,12 @@ export class TravelInformationCommentComponent implements OnInit {
       if (paramMap.has('id')) {
         this.travelInfoId = paramMap.get('id');
         if (paramMap.has('editId')) {
+          this.mode = 'edit';
           const id = paramMap.get('editId');
           this.commentId = id;
+        } else {
+          this.mode = 'create';
+          this.commentId = null;
         }
 
         this.traveInfoService.getTravelInfo(this.travelInfoId).subscribe(response => {
@@ -52,6 +56,14 @@ export class TravelInformationCommentComponent implements OnInit {
     }
     if (this.mode === 'create') {
       this.traveInfoService.addComment(
+        this.commentForm.value.comment,
+        this.travelInfoId,
+        this.creator,
+        this.name
+      )
+    } else {
+      this.traveInfoService.updateComment(
+        this.commentId,
         this.commentForm.value.comment,
         this.travelInfoId,
         this.creator,

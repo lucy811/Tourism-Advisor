@@ -48,6 +48,10 @@ router.get('/api/travel-info/:id/comments', TravelInfoController.getComments);
 
 router.get('/api/travel-info/comment/:id', TravelInfoController.getComment);
 
+router.put('/api/travel-info/comment/:id', TravelInfoController.updateComment);
+
 router.delete('/api/travel-info/:id', TravelInfoController.deleteTravelInfo);
+
+router.delete('/api/travel-info/comment/:id', TravelInfoController.deleteComment);
 
 module.exports = router;

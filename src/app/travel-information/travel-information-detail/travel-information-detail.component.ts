@@ -43,8 +43,14 @@ export class TravelInformationDetailComponent implements OnInit {
     })
   }
 
-  onDelete(travelInfoId: string) {
+  onDeleteTravelInfo(travelInfoId: string) {
     this.travelInfoService.deleteTravelInfo(travelInfoId).subscribe(response => {
+      this.router.navigate(['/travel-info-collection']);
+    })
+  }
+
+  onDeleteComment(commentId: string) {
+    this.travelInfoService.deleteComment(commentId).subscribe(response => {
       this.router.navigate(['/travel-info-collection']);
     })
   }
