@@ -16,6 +16,7 @@ export class TravelInformationDetailComponent implements OnInit {
   travelInfo: TravelInfo;
   currentUser: string;
   comments: any;
+  isLoaded = false;
   constructor(public route: ActivatedRoute, private travelInfoService: TravelInfoService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
@@ -24,6 +25,7 @@ export class TravelInformationDetailComponent implements OnInit {
         this.travelInfoId = paramMap.get('id');
         this.currentUser = this.authService.getCurrentLoginUser();
         this.travelInfoService.getTravelInfo(this.travelInfoId).subscribe(travelInfoData => {
+          this.isLoaded = true;
           this.travelInfo = {
             id: travelInfoData._id, 
             name: travelInfoData.name, 

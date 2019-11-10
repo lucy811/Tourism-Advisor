@@ -31,5 +31,6 @@ export class TravelInformationCollectionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.travelInfoCollectionSub.unsubscribe();
   }
 }
