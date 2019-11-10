@@ -3,6 +3,8 @@ const multer = require('multer');
 
 const TravelInfoController = require('../controllers/travel-info');
 
+const checkAuth = require('../middleware/check-auth');
+
 const router = express.Router();
 
 const MIME_TYPE_MAP = {
@@ -29,16 +31,18 @@ const storage = multer.diskStorage({
 
 router.post(
   '/api/travel-info',
+  checkAuth,
   multer({storage: storage}).single('image'),
   TravelInfoController.createdTravelInfo
 );
 
 router.post(
   '/api/travel-info/comment',
+  checkAuth,
   TravelInfoController.createdComment
 );
 
-router.put('/api/travel-info/:id', multer({storage: storage}).single('image'), TravelInfoController.updateTravelInfo);
+router.put('/api/travel-info/:id', multer({storage: storage}).single('image'), checkAuth, TravelInfoController.updateTravelInfo);
 
 router.get('/api/travel-info',  TravelInfoController.getTravelInfos);
 
@@ -48,10 +52,10 @@ router.get('/api/travel-info/:id/comments', TravelInfoController.getComments);
 
 router.get('/api/travel-info/comment/:id', TravelInfoController.getComment);
 
-router.put('/api/travel-info/comment/:id', TravelInfoController.updateComment);
+router.put('/api/travel-info/comment/:id', checkAuth, TravelInfoController.updateComment);
 
-router.delete('/api/travel-info/:id', TravelInfoController.deleteTravelInfo);
+router.delete('/api/travel-info/:id', checkAuth, TravelInfoController.deleteTravelInfo);
 
-router.delete('/api/travel-info/comment/:id', TravelInfoController.deleteComment);
+router.delete('/api/travel-info/comment/:id', checkAuth, TravelInfoController.deleteComment);
 
 module.exports = router;

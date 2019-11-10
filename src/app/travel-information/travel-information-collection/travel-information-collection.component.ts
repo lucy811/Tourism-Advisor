@@ -25,6 +25,7 @@ export class TravelInformationCollectionComponent implements OnInit, OnDestroy {
     this.travelInfoCollectionSub = this.traveInfoService.getPostUpdateListener()
       .subscribe((travelInfoCollectionData: {travelInfoCollection: any}) => {
         this.travelInfoCollection = travelInfoCollectionData.travelInfoCollection;
+        console.log('collection: ' + JSON.stringify(this.travelInfoCollection));
         this.isLoaded = false;
         this.spinner.hide();
       });
