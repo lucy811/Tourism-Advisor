@@ -93,7 +93,15 @@ export class TravelInformationCreateComponent implements OnInit {
         this.currentUser
       )
     }
-    this.travelInfoForm.reset();
+    setTimeout(this.navigateToLogin.bind(this), 2000);
+    setTimeout(this.resetForm.bind(this), 3000);
+  }
+
+  navigateToLogin() { 
     this.router.navigate(['/travel-info-collection']);
+  }
+
+  resetForm() {
+    this.travelInfoForm.reset();
   }
 }
