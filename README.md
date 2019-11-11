@@ -2,5 +2,5 @@
 * Implemented authentication function to allow user sign up, log in, log out and so on.
 * Implemented authorization function to allow different users to have own privilege.
 * Deployed it to AWS Elastic Beanstalk, and opened it at http://traveladvisorapplication-env.yymps3imem.us-east-2.elasticbeanstalk.com/
-* Front-end: HTML, CSS, JavaScript, Bootstrap
+* Front-end: Angular, Bootstrap
 * Server-side: Node.js, Express.js, MongoDB
