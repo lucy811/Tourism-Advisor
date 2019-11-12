@@ -60,9 +60,8 @@ exports.getTravelInfo = (req, res, next) => {
 exports.updateTravelInfo = (req, res, next) => {
   let imagePath; 
   if (req.file) {
-    console.log('file: ' + req.protocol);
     const url = req.protocol + '://travel-advisor-application.herokuapp.com';
-    imagePath = url + 'images/' + req.file.filename
+    imagePath = url + '/images/' + req.file.filename
   } else {
     imagePath = req.body.imagePath;
   }
