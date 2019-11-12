@@ -3,7 +3,7 @@ const TravelInfo = require('../models/travel-info');
 const Comment = require('../models/comment');
 
 exports.createdTravelInfo = (req, res, next) => {
-  const url = req.protocol + '://' + req.get('host');
+  const url = req.protocol + '://travel-advisor-application.herokuapp.com';
   const travelInfo = new TravelInfo({
     name: req.body.name,
     price: req.body.price,
@@ -60,8 +60,7 @@ exports.getTravelInfo = (req, res, next) => {
 exports.updateTravelInfo = (req, res, next) => {
   let imagePath; 
   if (req.file) {
-    console.log('file: ' + req.protocol);
-    const url = req.protocol + '://' + req.get('host');
+    const url = req.protocol + '://travel-advisor-application.herokuapp.com';
     imagePath = url + '/images/' + req.file.filename
   } else {
     imagePath = req.body.imagePath;
@@ -108,7 +107,6 @@ exports.deleteTravelInfo =  (req, res, next) => {
 };
 
 exports.createdComment = (req, res, next) => {
-  const url = req.protocol + '://' + req.get('host');
   const comment = new Comment({
     travelInfoId: req.body.travelInfoId,
     name: req.body.name,
