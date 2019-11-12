@@ -23,7 +23,6 @@ app.use('/images', express.static('backend/images'));
 app.use('/', express.static(path.join(__dirname, 'angular')));
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'travel-advisor-application.herokuapp.com');
   res.setHeader('Access-Control-Allow-Origin', '*'); 
   // no matter which domain the app which is sending the request is running on, 
   // it's allowed to access our resources
