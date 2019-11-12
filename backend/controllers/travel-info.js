@@ -8,7 +8,7 @@ exports.createdTravelInfo = (req, res, next) => {
     name: req.body.name,
     price: req.body.price,
     description: req.body.description,
-    imagePath: url +'/images/' + req.file.filename,
+    imagePath: url +'images/' + req.file.filename,
     creator: req.body.creator
   });
   travelInfo.save().then(createdTravelInfo => {
@@ -62,7 +62,7 @@ exports.updateTravelInfo = (req, res, next) => {
   if (req.file) {
     console.log('file: ' + req.protocol);
     const url = req.protocol + '://';
-    imagePath = url + '/images/' + req.file.filename
+    imagePath = url + 'images/' + req.file.filename
   } else {
     imagePath = req.body.imagePath;
   }
