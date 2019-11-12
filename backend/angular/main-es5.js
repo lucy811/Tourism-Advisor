@@ -63,7 +63,7 @@ module.exports = "<form class=\"auth-form\" (submit)=\"onSignup(signupForm)\" #s
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header\">\n      <a class=\"navbar-brand\">TravelAdvisor</a>\n    </div>\n\n    <div class=\"nav navbar-nav navbar-right\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"nav-item\" *ngIf=\"userIsAuthenticated\">\n          <a routerLink=\"/travel-info-collection\">\n            <i class=\"fa fa-home\" aria-hidden=\"true\"></i>\n          </a>\n        </li>\n        <li class=\"nav-item\" *ngIf=\"!userIsAuthenticated\">\n          <a class=\"nav-link\" routerLink=\"/login\">Login</a>\n        </li>\n        <li class=\"nav-item\" *ngIf=\"!userIsAuthenticated\">\n          <a class=\"nav-link\" routerLink=\"/signup\">Singup</a>\n        </li>\n        <li class=\"nav-item\" *ngIf=\"userIsAuthenticated\">\n          <p class=\"nav-link\">Login as {{ currentUser }}</p>\n        </li>\n        <li class=\"nav-item\" *ngIf=\"userIsAuthenticated\">\n          <a class=\"nav-link\" (click)=\"logout()\">Logout</a>\n        </li>\n      </ul>\n    </div>\n  </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header\">\n      <a class=\"navbar-brand\">TravelAdvisor</a>\n    </div>\n\n    <div class=\"nav navbar-nav navbar-right\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"nav-item\">\n          <a routerLink=\"/travel-info-collection\">\n            <i class=\"fa fa-home\" aria-hidden=\"true\"></i>\n          </a>\n        </li>\n        <li class=\"nav-item\" *ngIf=\"!userIsAuthenticated\">\n          <a class=\"nav-link\" routerLink=\"/login\">Login</a>\n        </li>\n        <li class=\"nav-item\" *ngIf=\"!userIsAuthenticated\">\n          <a class=\"nav-link\" routerLink=\"/signup\">Singup</a>\n        </li>\n        <li class=\"nav-item\" *ngIf=\"userIsAuthenticated\">\n          <p class=\"nav-link\">Login as {{ currentUser }}</p>\n        </li>\n        <li class=\"nav-item\" *ngIf=\"userIsAuthenticated\">\n          <a class=\"nav-link\" (click)=\"logout()\">Logout</a>\n        </li>\n      </ul>\n    </div>\n  </div>\n</nav>"
 
 /***/ }),
 
@@ -74,7 +74,7 @@ module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"background\"><img src=\"../../../assets/chicago-night.jpg\"></div>\n<div class=\"home-header\">\n  <h1>Welcome To Travel advisor</h1>\n</div>\n"
+module.exports = "<div id=\"background\"><img src=\"../../../assets/chicago-night.jpg\"></div>\n<div class=\"home-header\">\n  <h1>Welcome To Travel Advisor</h1>\n</div>\n"
 
 /***/ }),
 
@@ -366,7 +366,7 @@ var AuthGuard = /** @class */ (function () {
     AuthGuard.prototype.canActivate = function (route, state) {
         var isAuth = this.authService.getIsAuth();
         if (!isAuth) {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/']);
         }
         return isAuth;
     };
@@ -691,7 +691,7 @@ var CoreModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "nav {\n  background-color: #F5F5F5;\n}\n\n.fa-home {\n  margin-top: 13px;\n  margin-right: 6px;\n  color: grey;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9KaW5ndGluZy9Eb2N1bWVudHMvVWRlbXkvVG91cmlzbSBBZHZpc29yIFByb2plY3QvVHJhdmVsLUFkdmlzb3Ivc3JjL2FwcC9jb3JlL2hlYWRlci9oZWFkZXIuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvcmUvaGVhZGVyL2hlYWRlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUFBO0FDQ0Y7O0FERUE7RUFDRSxnQkFBQTtFQUNBLGlCQUFBO0VBQ0EsV0FBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvY29yZS9oZWFkZXIvaGVhZGVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsibmF2IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0Y1RjVGNTtcbn1cblxuLmZhLWhvbWUge1xuICBtYXJnaW4tdG9wOiAxM3B4O1xuICBtYXJnaW4tcmlnaHQ6IDZweDtcbiAgY29sb3I6IGdyZXk7XG59IiwibmF2IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0Y1RjVGNTtcbn1cblxuLmZhLWhvbWUge1xuICBtYXJnaW4tdG9wOiAxM3B4O1xuICBtYXJnaW4tcmlnaHQ6IDZweDtcbiAgY29sb3I6IGdyZXk7XG59Il19 */"
+module.exports = "nav {\n  background-color: #F5F5F5;\n}\n\n.fa-home {\n  margin-top: 13px;\n  margin-right: 6px;\n  color: grey;\n}\n\na {\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9KaW5ndGluZy9Eb2N1bWVudHMvVWRlbXkvVG91cmlzbSBBZHZpc29yIFByb2plY3QvVHJhdmVsLUFkdmlzb3Ivc3JjL2FwcC9jb3JlL2hlYWRlci9oZWFkZXIuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvcmUvaGVhZGVyL2hlYWRlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUFBO0FDQ0Y7O0FERUE7RUFDRSxnQkFBQTtFQUNBLGlCQUFBO0VBQ0EsV0FBQTtBQ0NGOztBREVBO0VBQ0UsZUFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvY29yZS9oZWFkZXIvaGVhZGVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsibmF2IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0Y1RjVGNTtcbn1cblxuLmZhLWhvbWUge1xuICBtYXJnaW4tdG9wOiAxM3B4O1xuICBtYXJnaW4tcmlnaHQ6IDZweDtcbiAgY29sb3I6IGdyZXk7XG59XG5cbmEge1xuICBjdXJzb3I6IHBvaW50ZXI7XG59IiwibmF2IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0Y1RjVGNTtcbn1cblxuLmZhLWhvbWUge1xuICBtYXJnaW4tdG9wOiAxM3B4O1xuICBtYXJnaW4tcmlnaHQ6IDZweDtcbiAgY29sb3I6IGdyZXk7XG59XG5cbmEge1xuICBjdXJzb3I6IHBvaW50ZXI7XG59Il19 */"
 
 /***/ }),
 
