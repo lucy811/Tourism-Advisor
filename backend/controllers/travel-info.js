@@ -3,12 +3,12 @@ const TravelInfo = require('../models/travel-info');
 const Comment = require('../models/comment');
 
 exports.createdTravelInfo = (req, res, next) => {
-  const url = req.protocol + '://';
+  const url = req.protocol + '://travel-advisor-application.herokuapp.com';
   const travelInfo = new TravelInfo({
     name: req.body.name,
     price: req.body.price,
     description: req.body.description,
-    imagePath: url +'images/' + req.file.filename,
+    imagePath: url +'/images/' + req.file.filename,
     creator: req.body.creator
   });
   travelInfo.save().then(createdTravelInfo => {
@@ -61,7 +61,7 @@ exports.updateTravelInfo = (req, res, next) => {
   let imagePath; 
   if (req.file) {
     console.log('file: ' + req.protocol);
-    const url = req.protocol + '://';
+    const url = req.protocol + '://travel-advisor-application.herokuapp.com';
     imagePath = url + 'images/' + req.file.filename
   } else {
     imagePath = req.body.imagePath;
