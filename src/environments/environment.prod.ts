@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://travel-advisor-application.herokuapp.com/api'
+  apiUrl: 'travel-advisor-application.herokuapp.com/api'
 };
